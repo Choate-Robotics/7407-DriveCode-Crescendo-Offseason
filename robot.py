@@ -30,6 +30,8 @@ class _Robot(wpilib.TimedRobot):
         period = .03
         commands2.CommandScheduler.getInstance().setPeriod(period)
         self.log.info(f"Scheduler period set to {period} seconds")
+        print("Rielle")
+        
         
         # Initialize subsystems
         def init_subsystems():
