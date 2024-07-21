@@ -60,7 +60,7 @@ class _Robot(wpilib.TimedRobot):
                 self.log.error(e)
                 self.nt.getTable('errors').putString('subsystem init', str(e))
                 raise e
-        
+        print("alex")
         
         self.log.complete("Robot initialized")
     def robotPeriodic(self):
