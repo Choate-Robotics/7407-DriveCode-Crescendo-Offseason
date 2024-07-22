@@ -1,6 +1,6 @@
 import pytest
 from toolkit.motors.rev_motors import SparkMax
-from phoenix5 import TalonFX, ControlMode
+from phoenix6 import TalonFX, ControlMode
 from toolkit.subsystem import Subsystem as Subsystem_C
 
 # to test a subsystem, you need to create a mechanism

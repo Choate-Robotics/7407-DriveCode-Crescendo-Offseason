@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-import phoenix5 as ctre
+import phoenix6 as ctre
 import math
 
 from toolkit.motor import PIDMotor
