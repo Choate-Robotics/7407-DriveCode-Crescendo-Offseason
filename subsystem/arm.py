@@ -1,8 +1,7 @@
-import math
-
 import config
 import constants
 
+from units.SI import radians
 from toolkit.motors.ctre_motors import TalonFX
 from toolkit.subsystem import Subsystem
 
@@ -28,16 +27,16 @@ class Arm(Subsystem):
         self.arm_motor.set_target_position(self.arm_motor.get_sensor_position() * constants.arm_gear_ratio)
         self.zeroed = True
 
-    # Extends arm to an angle
-    def extend(self, angle: float) -> None:
-        self.arm_motor.set_target_position((angle * math.pi/180) * constants.arm_gear_ratio)
+    # Extends arm to an radians
+    def extend(self, radians: radians) -> None:
+        self.arm_motor.set_target_position(radians * constants.arm_gear_ratio)
         self.arm_moving = True
 
     # Checks if extended
-    def isExtended(self, angle: float) -> bool:
+    def isExtended(self, radians: radians) -> bool:
         
         # Compare current sensor position with target position
-        if self.arm_moving and round(((self.arm_motor.get_sensor_position() / constants.arm_gear_ratio) * (180 / math.pi)), 2) == angle:
+        if self.arm_moving and round((self.arm_motor.get_sensor_position() / constants.arm_gear_ratio), 2) == round(radians, 2):
             self.arm_moving = False
             return True
         else:
