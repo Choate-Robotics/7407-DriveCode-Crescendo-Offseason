@@ -1,12 +1,10 @@
 import math
-
-import wpilib  # noqa
-from commands2 import SequentialCommandGroup  # noqa
-
+import wpilib
+from commands2 import SequentialCommandGroup
 import config
-import constants  # noqa
-import utils  # noqa
-from oi.keymap import Controllers  # noqa
+import constants
+import utils
+from oi.keymap import Controllers
 from subsystem import Arm
 from toolkit.command import SubsystemCommand
 from units.SI import radians
@@ -39,7 +37,7 @@ class SetArm(SubsystemCommand[Arm]):
 
     def end(self, interrupted: bool):
         if interrupted:
-            arm_angle = self.subsystem.get_angle()
+            arm_angle = self.subsystem.get_radians()
 
         self.subsystem.arm_moving = False
 
