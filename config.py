@@ -17,3 +17,8 @@ LOG_FILE_LEVEL: int = 1
 # 4 = SETUP
 # anything else will log nothing
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# Arm
+speaker_angle: float = 20.0
+amp_angle: float = 39.0
+intake_angle: float = 45.0
