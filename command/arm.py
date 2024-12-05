@@ -28,20 +28,20 @@ class SetArm(SubsystemCommand[Arm]):
 
     def initialize(self):
         # change to actual name
-        self.subsystem.set_angle(self.angle)
-        self.subsystem.is_rotating = True
+        self.subsystem.extend(self.angle)
+        self.subsystem.arm_moving = True
 
     def execute(self):
         pass
 
     def isFinished(self):
-        return self.subsystem.is_at_angle(self.angle)
+        return self.subsystem.isExtended(self.angle)
 
     def end(self, interrupted: bool):
         if interrupted:
             arm_angle = self.subsystem.get_angle()
 
-        self.subsystem.is_rotating = False
+        self.subsystem.arm_moving = False
 
 
 class ZeroArm(SubsystemCommand[Arm]):
@@ -55,17 +55,17 @@ class ZeroArm(SubsystemCommand[Arm]):
 
     def initialize(self):
         # change to actual name
-        self.subsystem.zero_arm()
+        self.subsystem.zero()
 
     def execute(self):
         pass
 
     def isFinished(self):
-        return self.subsystem.is_zeroed()
+        return self.subsystem.zeroed
 
     def end(self, interrupted: bool):
         if not interrupted:
-            self.subsystem.arm_zeroed = True
+            self.subsystem.zeroed = True
         else:
             ...
 
