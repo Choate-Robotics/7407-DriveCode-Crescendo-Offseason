@@ -23,6 +23,7 @@ class Arm(Subsystem):
         self.arm_motor_follower.init()
         self.arm_motor_follower.follow(self.arm_motor)
 
+    # Zero the arm
     def zero(self) -> None:
         self.arm_motor.set_target_position(self.arm_motor.get_sensor_position() * constants.arm_gear_ratio)
         self.zeroed = True
@@ -41,5 +42,3 @@ class Arm(Subsystem):
             return True
         else:
             return False
-        
-    

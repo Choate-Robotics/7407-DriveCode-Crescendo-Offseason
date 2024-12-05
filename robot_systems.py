@@ -2,14 +2,11 @@ import subsystem
 import sensors
 import wpilib
 
-
 class Robot:
-    pass
-
+    arm = subsystem.Arm()
 
 class Pneumatics:
     pass
-
 
 class Sensors:
     pass
