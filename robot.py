@@ -80,6 +80,10 @@ class _Robot(wpilib.TimedRobot):
                 self.log.error(e)
                 self.nt.getTable('errors').putString('command scheduler', str(e))
                 raise e
+            
+        Sensors.left_cam.update_tables()
+        Sensors.right_cam.update_tables()
+        Sensors.zoom_cam.update_tables()
 
     # Initialize subsystems
 
