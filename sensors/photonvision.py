@@ -36,3 +36,7 @@ class PhotonCamCustom:
                     pose.rotation()
                 ]
         )
+
+    def get_estimated_robot_pose(self):
+        self.estimator.update(self.cam.getLatestResult())
+        return self.estimator.lastPose
