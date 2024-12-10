@@ -16,28 +16,29 @@ from enum import Enum
 class SetArm(SubsystemCommand[Arm]):
     """
     Sets the wrist to a given angle (radians).
-    param: angle in radians
+    param: radians in radians
     """
 
-    def __init__(self, subsystem: Arm, angle: float):
+    def __init__(self, subsystem: Arm, radians: float):
         super().__init__(subsystem)
         self.subsystem = subsystem
-        self.angle = angle
+        self.radians = radians
 
     def initialize(self):
         # change to actual name
-        self.subsystem.extend(self.angle)
+        self.subsystem.extend(self.radians)
         self.subsystem.arm_moving = True
 
     def execute(self):
         pass
 
     def isFinished(self):
-        return self.subsystem.isExtended(self.angle)
+        return self.subsystem.is_extended(self.radians)
 
     def end(self, interrupted: bool):
         if interrupted:
-            arm_angle = self.subsystem.get_radians()
+            arm_radians = self.subsystem.get_radians()
+            print(f"Stuck at {arm_radians} radians")
 
         self.subsystem.arm_moving = False
 
@@ -62,22 +63,20 @@ class ZeroArm(SubsystemCommand[Arm]):
         return self.subsystem.zeroed
 
     def end(self, interrupted: bool):
-        if not interrupted:
-            self.subsystem.zeroed = True
-        else:
-            ...
+        if interrupted:
+            self.subsystem.zeroed = False
 
 
 class SetSpeakerPosition(SetArm):
     def __init__(self, subsystem: Arm):
-        super().__init__(subsystem, radians(config.speaker_angle))
+        super().__init__(subsystem, math.radians(config.speaker_angle))
 
 
 class SetAmpPosition(SetArm):
     def __init__(self, subsystem: Arm):
-        super().__init__(subsystem, radians(config.amp_angle))
+        super().__init__(subsystem, math.radians(config.amp_angle))
 
 
 class SetIntakePosition(SetArm):
     def __init__(self, subsystem: Arm):
-        super().__init__(subsystem, radians(config.intake_angle))
+        super().__init__(subsystem, math.radians(config.intake_angle))

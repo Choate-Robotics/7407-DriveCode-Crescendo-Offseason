@@ -32,11 +32,11 @@ class Arm(Subsystem):
         self.arm_motor.set_target_position(radians * constants.arm_gear_ratio)
         self.arm_moving = True
 
-    def getRadians(self) -> radians:
+    def get_radians(self) -> radians:
         return radians(self.arm_motor.get_sensor_position() / constants.arm_gear_ratio)
 
     # Checks if extended
-    def isExtended(self, radians: radians) -> bool:
+    def is_extended(self, radians: radians) -> bool:
         
         # Compare current sensor position with target position
         if self.arm_moving and round((self.arm_motor.get_sensor_position() / constants.arm_gear_ratio), 2) == round(radians, 2):
