@@ -1,10 +1,11 @@
 import subsystem
 import sensors
 import wpilib
+from subsystem import Intake
 
 
 class Robot:
-    pass
+    intake = Intake()
 
 
 class Pneumatics:

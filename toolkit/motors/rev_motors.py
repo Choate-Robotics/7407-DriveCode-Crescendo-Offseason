@@ -1,6 +1,6 @@
 from __future__ import annotations
 import config
-from utils import LocalLogger, CAN_delay
+from utils import LocalLogger
 
 import time  # noqa
 
@@ -195,22 +195,22 @@ class SparkMax(PIDMotor):
 
         # self.motor.restoreFactoryDefaults(True)
 
-        CAN_delay(0.5)
+       #(0.5)
 
         # Use the default config
         if self._configs[0] is not None and self._brushless:
             for enum, config in enumerate(self._configs):
-                CAN_delay(0.5)
+               # CAN_delay(0.5)
                 self._set_config(config, enum)
 
         self.motor.setInverted(self._inverted)
         
         
         
-        CAN_delay(0.5)
+       # CAN_delay(0.5)
         self.motor.burnFlash()
         
-        CAN_delay(0.25)
+       # CAN_delay(0.25)
 
         self._has_init_run = True
         self._logger.complete("Initialized")
