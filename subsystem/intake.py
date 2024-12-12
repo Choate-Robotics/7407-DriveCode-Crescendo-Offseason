@@ -1,7 +1,7 @@
 import config
 import constants
 from toolkit.subsystem import Subsystem
-from toolkit.motors.rev_motors import TalonFX
+from toolkit.motors.ctre_motors import TalonFX
 
 class Intake(Subsystem):
 
@@ -14,9 +14,11 @@ class Intake(Subsystem):
             inverted=False
         )
 
-    def start_intake(self):
-        self.motor.set_raw_output(10) #placeholder
+        self.note_exists_within: bool = False
+
+    def start_motor(self):
+        self.motor.set_raw_output(1) #placeholder
     
-    def stop_intake(self):
+    def stop_motor(self):
         self.motor.set_raw_output(0)
         

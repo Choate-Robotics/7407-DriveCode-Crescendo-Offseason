@@ -21,7 +21,7 @@ LOG_FILE_LEVEL: int = 1
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-intake_id= 1 #PLACEHOLDER
+intake_id= 9
 INTAKE_CONFIG= TalonConfig(
     0.315, 0, 0.0, 0, 0, brake_mode=False, current_limit=60, kV=0.12 #PLACEHOLDERS
 )
