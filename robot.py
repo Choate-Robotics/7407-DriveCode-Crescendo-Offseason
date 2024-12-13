@@ -88,9 +88,7 @@ class _Robot(wpilib.TimedRobot):
 
     def teleopInit(self):
         # self.log.info("Teleop initialized")
-        Robot.intake.start_motor()
-        time.sleep(5)
-        Robot.intake.stop_motor()
+        pass
 
     def teleopPeriodic(self):
         pass
