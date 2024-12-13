@@ -25,3 +25,6 @@ speaker_angle: float = 20.0
 amp_angle: float = 39.0
 intake_angle: float = 45.0
 arm_config: TalonConfig = TalonConfig(1, 1, 1, 1, 1)
+arm_motor_id = 10
+arm_follower_id = 11
+arm_current_threshold = 80

@@ -19,21 +19,21 @@ class SetArm(SubsystemCommand[Arm]):
     param: radians in radians
     """
 
-    def __init__(self, subsystem: Arm, radians: float):
+    def __init__(self, subsystem: Arm, angle: radians):
         super().__init__(subsystem)
         self.subsystem = subsystem
-        self.radians = radians
+        self.angle = angle
 
     def initialize(self):
         # change to actual name
-        self.subsystem.extend(self.radians)
+        self.subsystem.extend(self.angle)
         self.subsystem.arm_moving = True
 
     def execute(self):
         pass
 
     def isFinished(self):
-        return self.subsystem.is_extended(self.radians)
+        return self.subsystem.is_extended(self.angle)
 
     def end(self, interrupted: bool):
         if interrupted:
@@ -53,18 +53,18 @@ class ZeroArm(SubsystemCommand[Arm]):
         self.subsystem = subsystem
 
     def initialize(self):
-        # change to actual name
-        self.subsystem.zero()
+        self.subsystem.set_raw_output(-1)
+
 
     def execute(self):
         pass
 
     def isFinished(self):
-        return self.subsystem.zeroed
+        return self.subsystem.get_motor_current() > config.arm_current_threshold
 
     def end(self, interrupted: bool):
-        if interrupted:
-            self.subsystem.zeroed = False
+        if not interrupted:
+            self.subsystem.zero()
 
 
 class SetSpeakerPosition(SetArm):
