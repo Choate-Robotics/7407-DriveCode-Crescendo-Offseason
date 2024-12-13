@@ -59,5 +59,4 @@ class Arm(Subsystem):
         Set the raw output of the arm motor
         """
         self.arm_motor.set_raw_output(raw_value)
-        self.arm_motor_follower.set_raw_output(raw_value)
 

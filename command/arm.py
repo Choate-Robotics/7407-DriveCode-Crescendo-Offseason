@@ -53,7 +53,7 @@ class ZeroArm(SubsystemCommand[Arm]):
         self.subsystem = subsystem
 
     def initialize(self):
-        self.subsystem.set_raw_output(-1)
+        self.subsystem.set_raw_output(-0.1)
 
 
     def execute(self):
