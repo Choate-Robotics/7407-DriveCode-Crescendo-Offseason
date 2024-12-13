@@ -27,7 +27,7 @@ class Arm(Subsystem):
     # Zero the arm
     def zero(self) -> None:
         self.arm_motor.set_target_position(self.arm_motor.get_sensor_position() * constants.arm_gear_ratio)
-        self.arm_motor.set_sensor_position(constants.lower_arm_bound / constants.arm_gear_ratio)
+        self.arm_motor.set_sensor_position(constants.lower_arm_bound * constants.arm_gear_ratio)
         self.zeroed = True
 
     # Extends arm to an radians
