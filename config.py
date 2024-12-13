@@ -1,3 +1,5 @@
+from toolkit.motors.ctre_motors import TalonConfig
+
 DEBUG_MODE: bool = True
 # MAKE SURE TO MAKE THIS FALSE FOR COMPETITION
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17,3 +19,12 @@ LOG_FILE_LEVEL: int = 1
 # 4 = SETUP
 # anything else will log nothing
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# Arm
+speaker_angle: float = 20.0
+amp_angle: float = 39.0
+intake_angle: float = 45.0
+arm_config: TalonConfig = TalonConfig(1, 1, 1, 1, 1)
+arm_motor_id = 10
+arm_follower_id = 11
+arm_current_threshold = 80
