@@ -17,19 +17,19 @@ class _Robot(wpilib.TimedRobot):
     def __init__(self):
         super().__init__()
         
-        self.log = utils.LocalLogger("Robot")
+        # self.log = utils.LocalLogger("Robot")
         self.nt = ntcore.NetworkTableInstance.getDefault()
 
     def robotInit(self):
-        self.log._robot_log_setup()
+#         self.log._robot_log_setup()
         # Initialize Operator Interface
-        if config.DEBUG_MODE == True:
-            self.log.setup("WARNING: DEBUG MODE IS ENABLED")
+#         if config.DEBUG_MODE == True:
+# #             self.log.setup("WARNING: DEBUG MODE IS ENABLED")
         OI.init()
         OI.map_controls()
         period = .03
         commands2.CommandScheduler.getInstance().setPeriod(period)
-        self.log.info(f"Scheduler period set to {period} seconds")
+#         self.log.info(f"Scheduler period set to {period} seconds")
         
         # Initialize subsystems
         def init_subsystems():
@@ -51,18 +51,18 @@ class _Robot(wpilib.TimedRobot):
             try:
                 init_subsystems()
             except Exception as e:
-                self.log.error(e)
+#                 self.log.error(e)
                 self.nt.getTable('errors').putString('subsystem init', str(e))
         else:
             try:
                 init_subsystems()
             except Exception as e:
-                self.log.error(e)
+#                 self.log.error(e)
                 self.nt.getTable('errors').putString('subsystem init', str(e))
                 raise e
         
         
-        self.log.complete("Robot initialized")
+#         self.log.complete("Robot initialized")
     def robotPeriodic(self):
         if self.isSimulation():
             wpilib.DriverStation.silenceJoystickConnectionWarning(True)
@@ -71,37 +71,40 @@ class _Robot(wpilib.TimedRobot):
             try:
                 commands2.CommandScheduler.getInstance().run()
             except Exception as e:
-                self.log.error(e)
+#                 self.log.error(e)
                 self.nt.getTable('errors').putString('command scheduler', str(e))
         else:
             try:
                 commands2.CommandScheduler.getInstance().run()
             except Exception as e:
-                self.log.error(e)
+#                 self.log.error(e)
                 self.nt.getTable('errors').putString('command scheduler', str(e))
                 raise e
             
         Sensors.left_cam.update_tables()
         Sensors.right_cam.update_tables()
-        Sensors.zoom_cam.update_tables()
+        # Sensors.zoom_cam.update_tables()
 
     # Initialize subsystems
 
     # Pneumatics
 
     def teleopInit(self):
-        self.log.info("Teleop initialized")
+#         self.log.info("Teleop initialized")
+        pass
 
     def teleopPeriodic(self):
         pass
     def autonomousInit(self):
-        self.log.info("Autonomous initialized")
+#         self.log.info("Autonomous initialized")
+        pass
 
     def autonomousPeriodic(self):
         pass
 
     def disabledInit(self) -> None:
-        self.log.info("Robot disabled")
+#         self.log.info("Robot disabled")
+        pass
 
     def disabledPeriodic(self) -> None:
         pass
