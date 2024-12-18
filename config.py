@@ -17,3 +17,8 @@ LOG_FILE_LEVEL: int = 1
 # 4 = SETUP
 # anything else will log nothing
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#cameras
+left_cam_name = "left_cam"
+right_cam_name = "right_cam"
+zoom_cam_name = "zoom_cam"
