@@ -18,6 +18,7 @@ class PhotonCamCustom:
             self.cam,
             self.robot_to_camera
         )
+        self.estimator.multiTagFallbackStrategy = PoseStrategy.LOWEST_AMBIGUITY
         self.table = ntcore.NetworkTableInstance.getDefault().getTable("Cameras")
 
     def init(self):
@@ -26,17 +27,23 @@ class PhotonCamCustom:
     def update_tables(self):
         if not TimedRobot.isSimulation():
             result = self.cam.getLatestResult()
-            self.estimator.update(result)
-            pose = self.estimator.lastPose
+            # multitagPose = result.multiTagResult.estimatedPose.best
+            pose = self.estimator.update(result)
             if pose:
+                estimatedPose = pose.estimatedPose.toPose2d()
                 self.table.putNumberArray(
                     f"{self.name} estimated pose",
                     [
-                        pose.X(),
-                        pose.Y(),
-                        pose.rotation()
+                        estimatedPose.X(),
+                        estimatedPose.Y(),
+                        estimatedPose.rotation().radians()
                     ]
                 )
+
+            self.table.putBoolean(f"{self.name} has target", result.hasTargets())
+            if result.hasTargets():
+                self.table.putNumberArray("ids", [target.getFiducialId() for target in result.getTargets()])
+
 
     def get_estimated_robot_pose(self):
         self.estimator.update(self.cam.getLatestResult())

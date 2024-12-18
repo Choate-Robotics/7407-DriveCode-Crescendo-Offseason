@@ -83,7 +83,7 @@ class _Robot(wpilib.TimedRobot):
             
         Sensors.left_cam.update_tables()
         Sensors.right_cam.update_tables()
-        # Sensors.zoom_cam.update_tables()
+        Sensors.zoom_cam.update_tables()
 
     # Initialize subsystems
 
