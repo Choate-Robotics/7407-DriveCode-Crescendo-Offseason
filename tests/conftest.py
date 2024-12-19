@@ -5,6 +5,7 @@ import phoenix6 as ctre
 import commands2
 import rev
 from robot_systems import Robot, Sensors, Pneumatics
+
 # this is a fixture, which is a function that runs before each test function
 # this is good if you want to set up some data before each test
 # and then clean up after the tests are done
@@ -15,12 +16,11 @@ from robot_systems import Robot, Sensors, Pneumatics
 # def arm():
 #     print("arm setup")
 #     Robot.arm.init()
-    
+
 #     yield Robot.arm()
 #     print("arm teardown")
-    
-    
-    
+
+
 # # this is a fixture that will be used to mock the ctre library
 @pytest.fixture(scope="session")
 def ctre_mock():
@@ -45,7 +45,6 @@ def rev_mock():
     with mock.patch("rev"):
         yield rev
     print("rev_mock teardown")
-    
 
 
 # this is a fixture that will be used to mock the commands2 library
@@ -59,7 +58,6 @@ def commands2_mock():
     with mock.patch("commands2"):
         yield commands2
     print("commands2_mock teardown")
-    
 
 
 # this is a fixture that will be used to mock the wpilib library
@@ -73,4 +71,3 @@ def wpilib_mock():
     with mock.patch("wpilib"):
         yield wpilib
     print("wpilib_mock teardown")
-    

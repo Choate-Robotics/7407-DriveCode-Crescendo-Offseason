@@ -19,6 +19,7 @@ class _Robot(wpilib.TimedRobot):
         
         # self.log = utils.LocalLogger("Robot")
         self.nt = ntcore.NetworkTableInstance.getDefault()
+        self.scheduler = commands2.CommandScheduler.getInstance()
 
     def robotInit(self):
 #         self.log._robot_log_setup()
@@ -34,19 +35,23 @@ class _Robot(wpilib.TimedRobot):
         # Initialize subsystems
         def init_subsystems():
             subsystems: list[Subsystem] = list(
-                {k: v for k, v in Robot.__dict__.items() if isinstance(v, Subsystem) and hasattr(v, 'init')}.values() 
+                {
+                    k: v
+                    for k, v in Robot.__dict__.items()
+                    if isinstance(v, Subsystem) and hasattr(v, "init")
+                }.values()
             )
-            
+
             # sensors: list = list(
             #     {k: v for k, v in Sensors.__dict__.items() if isinstance(v, sensors.Sensor) and hasattr(v, 'init')}.values()
             # )
 
             for subsystem in subsystems:
                 subsystem.init()
-                
+
             # for sensor in sensors:
             #     sensor.init()
-                
+
         if config.DEBUG_MODE == False:
             try:
                 init_subsystems()
@@ -66,16 +71,16 @@ class _Robot(wpilib.TimedRobot):
     def robotPeriodic(self):
         if self.isSimulation():
             wpilib.DriverStation.silenceJoystickConnectionWarning(True)
-        
+
         if config.DEBUG_MODE == False:
             try:
-                commands2.CommandScheduler.getInstance().run()
+                self.scheduler.run()
             except Exception as e:
 #                 self.log.error(e)
                 self.nt.getTable('errors').putString('command scheduler', str(e))
         else:
             try:
-                commands2.CommandScheduler.getInstance().run()
+                self.scheduler.run()
             except Exception as e:
 #                 self.log.error(e)
                 self.nt.getTable('errors').putString('command scheduler', str(e))
@@ -95,6 +100,7 @@ class _Robot(wpilib.TimedRobot):
 
     def teleopPeriodic(self):
         pass
+
     def autonomousInit(self):
 #         self.log.info("Autonomous initialized")
         pass
